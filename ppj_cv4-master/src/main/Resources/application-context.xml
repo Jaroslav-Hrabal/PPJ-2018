@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id = "pingMessage" class ="app.assignments.message.PingMessage"/>
+    <bean id = "helloMessage" class = "app.assignments.message.CustomMessage">
+        <property name ="sender" value="Sender"></property>
+        <property name ="recipient" value="recipient"></property>
+        <property name ="text" value="Text"></property>
+    </bean>
+    <bean id = "pingMessageReply" class ="app.assignments.message.ReplyMessage">
+
+        <constructor-arg index="0" ref="pingMessage"/>
+        <constructor-arg index="1" value="ping reply"/>
+    </bean>
+
+    <bean id = "stdoutWriter" class = "app.assignments.writer.StdoutWriter">
+
+    </bean>
+    <bean id = "listWriter" class = "app.assignments.writer.ListWriter"></bean>
+
+</beans>
