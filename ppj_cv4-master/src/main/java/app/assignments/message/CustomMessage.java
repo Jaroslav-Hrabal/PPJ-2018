@@ -19,7 +19,7 @@ package app.assignments.message;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("helloMessage")
+
 public class CustomMessage implements Message {
     @Value("sender")
     private String sender;
