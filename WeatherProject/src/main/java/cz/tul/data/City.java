@@ -15,7 +15,7 @@ public class City {
     @JoinColumn(name = "StateName")
     private String StateName;
 
-    public City(String cityName, int information_id) {
+    public City(String cityName) {
         CityName = cityName;
 
     }
@@ -31,5 +31,11 @@ public class City {
         CityName = cityName;
     }
 
+    public String getStateName() {
+        return StateName;
+    }
 
+    public void setStateName(String stateName) {
+        StateName = stateName;
+    }
 }

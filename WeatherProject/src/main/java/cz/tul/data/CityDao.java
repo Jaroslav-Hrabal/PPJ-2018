@@ -37,6 +37,15 @@ public class CityDao {
             City city = (City) crit.uniqueResult();
             return city != null;
         }
+    public City getCity(String cityName) {
+        Criteria crit = session().createCriteria(City.class);
+
+        crit.createAlias("city", "c");
+
+        crit.add(Restrictions.eq("c.CityName", cityName));
+
+        return (City) crit.uniqueResult();
+    }
 
     @SuppressWarnings("unchecked")
     public List<City> getStateCities(String stateName) {

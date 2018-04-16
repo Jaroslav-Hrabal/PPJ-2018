@@ -1,9 +1,6 @@
 package cz.tul.data;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 public class StateDao {
     private SessionFactory sessionFactory;
 
@@ -40,6 +37,22 @@ public class StateDao {
     public List<State> getAllStates() {
 //        return session().createQuery("from state").list();
         return session().createCriteria(State.class).list();
+    }
+
+    public State getState(String stateName) {
+        Criteria crit = session().createCriteria(State.class);
+
+        crit.createAlias("state", "s");
+
+        crit.add(Restrictions.eq("s.StateName", stateName));
+
+        return (State) crit.uniqueResult();
+    }
+
+    public boolean delete(String stateName) {
+        Query query = session().createQuery("delete from state where StateName=:stateName");
+        query.setString("StateName", stateName);
+        return query.executeUpdate() == 1;
     }
 
 

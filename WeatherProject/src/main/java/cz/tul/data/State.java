@@ -10,7 +10,7 @@ public class State {
 
 
 
-    public State(String stateName, String cityName, int information_id) {
+    public State(String stateName) {
         StateName = stateName;
 
 

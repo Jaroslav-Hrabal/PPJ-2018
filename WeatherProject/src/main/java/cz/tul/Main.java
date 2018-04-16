@@ -24,14 +24,16 @@ public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
+    private SessionFactory sessionFactory;
+
     @Bean
     public CityDao cityDao() {
-        return new CityDao();
+        return new CityDao(sessionFactory);
     }
 
     @Bean
     public StateDao stateDao() {
-        return new StateDao();
+        return new StateDao(sessionFactory);
     }
 
     //@Autowired
