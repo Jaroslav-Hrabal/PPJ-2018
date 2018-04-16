@@ -1,12 +1,15 @@
 package cz.tul.data;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 public class City {
+    @Column(name = "CityName")
     private String CityName;
-    private int information_id;
 
     public City(String cityName, int information_id) {
         CityName = cityName;
-        this.information_id = information_id;
+
     }
 
     public City() {
@@ -20,11 +23,5 @@ public class City {
         CityName = cityName;
     }
 
-    public int getInformation_id() {
-        return information_id;
-    }
 
-    public void setInformation_id(int information_id) {
-        this.information_id = information_id;
-    }
 }

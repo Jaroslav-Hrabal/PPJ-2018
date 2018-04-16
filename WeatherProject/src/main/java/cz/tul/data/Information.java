@@ -1,13 +1,28 @@
 package cz.tul.data;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Information {
+    @Column
     String Wind;
+    @Column
     String Cloudiness;
+    @Column
     String Pressure;
+    @Column
     String Humidity;
+    @Column
     String Sunrise;
+    @Column
     String Sunset;
+    @Column
     String Geo;
+    @ManyToOne
+    @JoinColumn(name="CityName")
+    String CityName;
+    String DateMeasured;
 
     public Information(String wind, String cloudiness, String pressure, String humidity, String sunrise, String sunset, String geo) {
         Wind = wind;

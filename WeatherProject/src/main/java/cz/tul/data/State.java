@@ -1,14 +1,21 @@
 package cz.tul.data;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class State {
+    @Column
     private String StateName;
+    @ManyToOne
+    @JoinColumn(name="CityName")
     private String CityName;
-    private int information_id;
+
 
     public State(String stateName, String cityName, int information_id) {
         StateName = stateName;
         CityName = cityName;
-        this.information_id = information_id;
+
     }
 
     public State() {
@@ -30,11 +37,5 @@ public class State {
         CityName = cityName;
     }
 
-    public int getInformation_id() {
-        return information_id;
-    }
 
-    public void setInformation_id(int information_id) {
-        this.information_id = information_id;
-    }
 }
