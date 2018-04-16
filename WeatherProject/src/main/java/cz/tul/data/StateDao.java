@@ -1,5 +1,11 @@
 package cz.tul.data;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -9,33 +15,37 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public class StateDao {
-    @Autowired
-    private NamedParameterJdbcOperations jdbc;
+    private SessionFactory sessionFactory;
 
-    @Transactional
-    public boolean create(State state) {
-
-        MapSqlParameterSource params = new MapSqlParameterSource();
-
-        params.addValue("CityName", state.getCityName());
-        params.addValue("StateName", state.getStateName());
-        params.addValue("information_id", state.getInformation_id());
-
-
-        return jdbc.update("insert into users (CityName,StateName,information_id) values (:CityName, :StateName, :information_id)", params) == 1;
+    public StateDao(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
-    public boolean exists(String city) {
-        return jdbc.queryForObject("select count(*) from state where CityName=:CityName",
-                new MapSqlParameterSource("CityName", city), Integer.class) > 0;
+    public Session session() {
+        return sessionFactory.getCurrentSession();
     }
 
+    public void create(State state) {
+        session().save(state);
+    }
+
+    public boolean exists(String stateName) {
+        Criteria crit = session().createCriteria(State.class);
+        crit.add(Restrictions.idEq(stateName));
+        State state = (State) crit.uniqueResult();
+        return state != null;
+    }
+
+    @SuppressWarnings("unchecked")
     public List<State> getAllStates() {
-        return jdbc.query("select * from state", BeanPropertyRowMapper.newInstance(State.class));
+//        return session().createQuery("from state").list();
+        return session().createCriteria(State.class).list();
     }
 
-    public void deleteState() {
-        jdbc.getJdbcOperations().execute("DELETE FROM state");
 
+
+    public void deleteStates() {
+        session().createQuery("delete from state").executeUpdate();
     }
+
 }

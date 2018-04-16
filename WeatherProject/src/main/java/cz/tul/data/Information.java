@@ -22,6 +22,7 @@ public class Information {
     @ManyToOne
     @JoinColumn(name="CityName")
     String CityName;
+    @Column
     String DateMeasured;
 
     public Information(String wind, String cloudiness, String pressure, String humidity, String sunrise, String sunset, String geo) {

@@ -1,11 +1,19 @@
 package cz.tul.data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 public class City {
     @Column(name = "CityName")
     private String CityName;
+    @OneToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "StateName")
+    private String StateName;
 
     public City(String cityName, int information_id) {
         CityName = cityName;

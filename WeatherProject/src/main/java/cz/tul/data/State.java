@@ -7,14 +7,12 @@ import javax.persistence.ManyToOne;
 public class State {
     @Column
     private String StateName;
-    @ManyToOne
-    @JoinColumn(name="CityName")
-    private String CityName;
+
 
 
     public State(String stateName, String cityName, int information_id) {
         StateName = stateName;
-        CityName = cityName;
+
 
     }
 
@@ -29,13 +27,6 @@ public class State {
         StateName = stateName;
     }
 
-    public String getCityName() {
-        return CityName;
-    }
-
-    public void setCityName(String cityName) {
-        CityName = cityName;
-    }
 
 
 }

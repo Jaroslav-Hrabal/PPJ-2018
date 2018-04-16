@@ -1,42 +1,68 @@
 package cz.tul.data;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.util.List;
-
+@Transactional
 public class CityDao {
-    @Autowired
-    private NamedParameterJdbcOperations jdbc;
 
-    public List<City> getCities() {
 
-        return jdbc
-                .query("select * from city, state where state.CityName=city.CityName",
-                        (ResultSet rs, int rowNum) -> {
-                            City city = new City();
-                            city.setCityName(rs.getString("CityName"));
-                            city.setInformation_id(rs.getInt("invormation_id"));
-                            return city;
-                        }
-                );
+
+        private SessionFactory sessionFactory;
+
+        public CityDao(SessionFactory sessionFactory) {
+            this.sessionFactory = sessionFactory;
+        }
+
+        public Session session() {
+            return sessionFactory.getCurrentSession();
+        }
+
+        public void create(City city) {
+            session().save(city);
+        }
+
+        public boolean exists(String cityName) {
+            Criteria crit = session().createCriteria(City.class);
+            crit.add(Restrictions.idEq(cityName));
+            City city = (City) crit.uniqueResult();
+            return city != null;
+        }
+
+    @SuppressWarnings("unchecked")
+    public List<City> getStateCities(String stateName) {
+        Criteria crit = session().createCriteria(City.class);
+        crit.createAlias("city", "c");
+        crit.add(Restrictions.eq("city.StateName", stateName));
+        return crit.list();
     }
-    public boolean update(City city) {
-        BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
-                city);
 
-        return jdbc.update("update city set information_id=:information_id where CityName=:CityName", params) == 1;
-    }
-    public boolean create(City city) {
+        @SuppressWarnings("unchecked")
+        public List<City> getAllCities() {
+//        return session().createQuery("from city").list();
+            return session().createCriteria(City.class).list();
+        }
 
-        BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
-                city);
-
-        return jdbc
-                .update("insert into city (CityName, information_id) values (:CityName, :information_id)",
-                        params) == 1;
+    public void saveOrUpdate(City city) {
+        session().saveOrUpdate(city);
     }
 
-}
+    public boolean delete(String cityName) {
+        Query query = session().createQuery("delete from city where CityName=:cityName");
+        query.setString("cityName", cityName);
+        return query.executeUpdate() == 1;
+    }
+        public void deleteCities() {
+            session().createQuery("delete from city").executeUpdate();
+        }
+
+    }
