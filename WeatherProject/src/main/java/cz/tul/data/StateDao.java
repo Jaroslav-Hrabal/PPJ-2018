@@ -14,10 +14,10 @@ import java.util.List;
 public class StateDao {
     private SessionFactory sessionFactory;
 
-    public StateDao(SessionFactory sessionFactory) {
+    /*public StateDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
+*/
     public Session session() {
         return sessionFactory.getCurrentSession();
     }

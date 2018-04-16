@@ -19,10 +19,10 @@ public class CityDao {
 
         private SessionFactory sessionFactory;
 
-        public CityDao(SessionFactory sessionFactory) {
+       /* public CityDao(SessionFactory sessionFactory) {
             this.sessionFactory = sessionFactory;
         }
-
+*/
         public Session session() {
             return sessionFactory.getCurrentSession();
         }
