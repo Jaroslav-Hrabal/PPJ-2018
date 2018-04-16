@@ -5,7 +5,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 public class City {
     @Column(name = "CityName")
