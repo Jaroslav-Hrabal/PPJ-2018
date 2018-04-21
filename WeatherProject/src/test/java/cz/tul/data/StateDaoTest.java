@@ -11,9 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@SpringApplicationConfiguration(classes = {Main.class})
 @ActiveProfiles({"test"})
 public class StateDaoTest {
     @Autowired

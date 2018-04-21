@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@SpringApplicationConfiguration(classes = {Main.class})
 @ActiveProfiles({"test"})
 public class CityDaoTest {
 

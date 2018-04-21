@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.List;
 @SpringBootApplication
 @EnableTransactionManagement
-@EntityScan(basePackages = "cz.tul.data")
+@EntityScan("cz.tul.data")
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
