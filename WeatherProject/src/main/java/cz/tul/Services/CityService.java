@@ -29,6 +29,40 @@ public class CityService {
     public List<City> getAllCities() {
         return StreamSupport.stream(cityRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
+    public List<City> getCity(String cityname) {
+
+        if (cityname == null) {
+            return null;
+        }
+
+        List<City> cities = cityRepository.findByCityName(cityname);
+
+        if (cities.size() == 0) {
+            return null;
+        }
+
+        return cities;
+    }
+
+    public List<City> getStateCities(String statename) {
+
+        if (statename == null) {
+            return null;
+        }
+
+        List<City> cities = cityRepository.findByCityName(statename);
+
+        if (cities.size() == 0) {
+            return null;
+        }
+
+        return cities;
+    }
+
+    public void delete(String cityname) {
+        cityRepository.delete(cityname);
+    }
+
 
     public void deleteCities() {
         cityRepository.deleteAll();

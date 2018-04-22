@@ -1,5 +1,7 @@
 package cz.tul;
 
+import cz.tul.Services.CityService;
+import cz.tul.Services.StateService;
 import cz.tul.data.City;
 import cz.tul.data.CityDao;
 import cz.tul.data.StateDao;
@@ -8,18 +10,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+//import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
-@SpringBootApplication
+//@SpringBootApplication
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
 @EnableTransactionManagement
 @EntityScan("cz.tul.data")
 public class Main {
@@ -29,37 +39,43 @@ public class Main {
    // private SessionFactory sessionFactory;
 
     @Bean
-    public CityDao cityDao() {
-        return new CityDao();
+    public CityService cityService() {
+        return new CityService();
     }
 
     @Bean
-    public StateDao stateDao() {
-        return new StateDao();
+    public StateService stateService() {
+        return new StateService();
     }
 
     @Autowired
     EntityManagerFactory entityManagerFactory;
-
+/*
     @Bean
     public SessionFactory sessionFactory() {
         return entityManagerFactory.unwrap(SessionFactory.class);
     }
-
+*/
+    @Autowired
+    private SessionFactory sessionFactory;
     @Bean
+    public HibernateJpaSessionFactoryBean sessionFactory() {
+        return new HibernateJpaSessionFactoryBean();
+    }
+    /*@Bean
     public PlatformTransactionManager txManager() {
         return new HibernateTransactionManager(entityManagerFactory.unwrap(SessionFactory.class));
     }
-
+*/
     public static void main(String[] args) throws Exception {
 
         SpringApplication app = new SpringApplication(Main.class);
         ApplicationContext ctx = app.run(args);
-        CityDao cityDao = ctx.getBean(CityDao.class);
+        /*CityDao cityDao = ctx.getBean(CityDao.class);
         StateDao stateDao = ctx.getBean(StateDao.class);
         List<City> cities = cityDao.getAllCities();
         System.out.println(cities);
-
+*/
     }
 
 }

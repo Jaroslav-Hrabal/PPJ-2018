@@ -27,16 +27,16 @@ public class StateService {
             return false;
         }
 
-        return stateRepository.findByUsername(statename).size() != 0;
+        return stateRepository.findByStateName(statename).size() != 0;
 
     }
-    public List<State> getStatesByName(String statename) {
+    public List<State> getState(String statename) {
 
         if (statename == null) {
             return null;
         }
 
-        List<State> states = stateRepository.findByUsername(statename);
+        List<State> states = stateRepository.findByStateName(statename);
 
         if (states.size() == 0) {
             return null;
