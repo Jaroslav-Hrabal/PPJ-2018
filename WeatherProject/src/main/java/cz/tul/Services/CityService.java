@@ -17,5 +17,21 @@ public class CityService {
     public List<City> getStates() {
         return StreamSupport.stream(cityRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
+    public void create(City city) {
+        cityRepository.save(city);
+    }
+
+
+    public boolean exists(String cityname) {
+        return cityRepository.exists(cityname);
+    }
+
+    public List<City> getAllCities() {
+        return StreamSupport.stream(cityRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    }
+
+    public void deleteCities() {
+        cityRepository.deleteAll();
+    }
 }
 

@@ -1,12 +1,14 @@
 package cz.tul.data;
 
 import cz.tul.Main;
+import cz.tul.Services.CityService;
+import cz.tul.Services.StateService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,10 +22,10 @@ import static org.junit.Assert.*;
 public class CityDaoTest {
 
     @Autowired
-    private CityDao cityDao;
+    private CityService cityService;
 
     @Autowired
-    private StateDao stateDao;
+    private StateService stateService;
 
     private City city1 = new City("City1");
     private City city2 = new City("City2");
