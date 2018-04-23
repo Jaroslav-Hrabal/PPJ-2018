@@ -65,7 +65,7 @@ public class CityDaoTest {
         assertEquals("Retrieved city should equal inserted city.", city2.getCityName(),retrieved.getCityName());
         cityService.deleteCities();
     }
-
+/*
     @Test
     public void getStateCities() {
         city1.setStateName(state1.getStateName());
@@ -80,7 +80,7 @@ public class CityDaoTest {
                 retrieved.get(1).getCityName());
         cityService.deleteCities();
     }
-
+*/
     @Test
     public void getAllCities() {
         cityService.create(city1);

@@ -7,12 +7,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "city")
 public class City {
+    @Id
     @Column(name = "CityName")
     private String CityName;
-    @OneToMany
+
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "StateName")
     private String StateName;
+
 
     public City(String cityName) {
         CityName = cityName;
