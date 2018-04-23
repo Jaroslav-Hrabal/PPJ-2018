@@ -38,7 +38,6 @@ public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-
     @Autowired
     EntityManagerFactory entityManagerFactory;
 

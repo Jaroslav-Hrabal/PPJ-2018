@@ -8,17 +8,17 @@ import javax.persistence.*;
 @Table(name = "city")
 public class City {
     @Id
-    @Column(name = "CityName")
-    private String CityName;
+    @Column(name = "cityName")
+    private String cityName;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "StateName")
-    private String StateName;
+    @JoinColumn(name = "stateName")
+    private State state;
 
 
     public City(String cityName) {
-        CityName = cityName;
+        cityName = cityName;
 
     }
 
@@ -26,18 +26,18 @@ public class City {
     }
 
     public String getCityName() {
-        return CityName;
+        return cityName;
     }
 
     public void setCityName(String cityName) {
-        CityName = cityName;
+        this.cityName = cityName;
     }
 
-    public String getStateName() {
-        return StateName;
+    public State getState() {
+        return state;
     }
 
-    public void setStateName(String stateName) {
-        StateName = stateName;
+    public void setState(State state) {
+        this.state = state;
     }
 }

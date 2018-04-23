@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface StateRepository extends CrudRepository<State, String> {
 
-    @Query("select o from State as o where State.StateName=:StateName")
-    public List<State> findByStateName(@Param("StateName") String StateName);
+    @Query("select o from State as o where o.stateName=:stateName")
+    public List<State> findByStateName(@Param("stateName") String stateName);
 }

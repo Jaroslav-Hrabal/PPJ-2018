@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface CityRepository extends CrudRepository<City, String> {
-    @Query("select o from City as o where City.CityName=:CityName")
-    public List<City> findByCityName(@Param("CityName") String CityName);
-    @Query("select o from City as o where City.StateName=:StateName")
-    public List<City> findByStateName(@Param("StateName") String StateName);
+    @Query("select o from City as o where o.cityName=:cityName")
+    public List<City> findByCityName(@Param("cityName") String cityName);
+    @Query("select o from City as o where o.state.stateName=:stateName")
+    public List<City> findByStateName(@Param("stateName") String stateName);
 
 }

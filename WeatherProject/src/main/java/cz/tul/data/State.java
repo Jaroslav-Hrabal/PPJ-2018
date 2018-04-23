@@ -6,13 +6,13 @@ import javax.persistence.*;
 @Table(name = "state")
 public class State {
     @Id
-    @Column(name = "StateName")
-    private String StateName;
+    @Column(name = "stateName")
+    private String stateName;
 
 
 
     public State(String stateName) {
-        StateName = stateName;
+        stateName = stateName;
 
 
     }
@@ -21,11 +21,11 @@ public class State {
     }
 
     public String getStateName() {
-        return StateName;
+        return stateName;
     }
 
     public void setStateName(String stateName) {
-        StateName = stateName;
+        stateName = stateName;
     }
 
 
