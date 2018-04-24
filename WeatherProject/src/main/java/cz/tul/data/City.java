@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "city")
 public class City {
+
+    // TODO(os) just name
     @Id
     @Column(name = "cityName")
     private String cityName;
@@ -17,6 +19,7 @@ public class City {
     private State state;
 
 
+    // TODO(os) ???
     public City(String cityName) {
         cityName = cityName;
 

@@ -14,6 +14,7 @@ public class StateService {
     @Autowired
     private StateRepository stateRepository;
 
+    // TODO(os) listStates or just list ...
     public List<State> getStates() {
         return StreamSupport.stream(stateRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
@@ -21,23 +22,29 @@ public class StateService {
         stateRepository.save(state);
     }
 
+    // TODO(os) why statename?
     public boolean hasState(String statename) {
 
+        // TODO(os) ???
         if (statename == null) {
             return false;
         }
 
+        // TODO(os) state name should be unique
         return stateRepository.findByStateName(statename).size() != 0;
 
     }
-    public List<State> getState(String statename) {
+    // TODO(os) why statename?
+    public List<State> getState(String statename ) {
 
+        // TODO(os) ???
         if (statename == null) {
             return null;
         }
 
         List<State> states = stateRepository.findByStateName(statename);
 
+        // TODO(os) ???
         if (states.size() == 0) {
             return null;
         }
@@ -54,6 +61,7 @@ public class StateService {
         stateRepository.delete(statename);
     }
 
+    // TODO(os) deleteAll
     public void deleteStates() {
         stateRepository.deleteAll();
     }

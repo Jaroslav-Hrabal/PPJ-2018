@@ -5,12 +5,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "state")
 public class State {
+
+    // TODO(os) just name
     @Id
     @Column(name = "stateName")
     private String stateName;
 
 
-
+    //TODO(os) ???
     public State(String stateName) {
         stateName = stateName;
 
