@@ -2,6 +2,7 @@ package cz.tul;
 
 import cz.tul.Services.CityService;
 import cz.tul.Services.StateService;
+import cz.tul.data.City;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -23,8 +23,6 @@ import javax.persistence.EntityManagerFactory;
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
-
-   // private SessionFactory sessionFactory;
 
     @Bean
     public CityService cityService() {
@@ -36,8 +34,6 @@ public class Main {
         return new StateService();
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-
     @Autowired
     EntityManagerFactory entityManagerFactory;
 
@@ -46,20 +42,13 @@ public class Main {
         return entityManagerFactory.unwrap(SessionFactory.class);
     }
 
-    @Bean
-    public PlatformTransactionManager txManager() {
-        return new org.springframework.orm.hibernate4.HibernateTransactionManager(entityManagerFactory.unwrap(SessionFactory.class));
-    }
 
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Main.class);
         ApplicationContext ctx = app.run(args);
-        /*CityDao cityDao = ctx.getBean(CityDao.class);
-        StateDao stateDao = ctx.getBean(StateDao.class);
+        CityService cityDao = ctx.getBean(CityService.class);
         List<City> cities = cityDao.getAllCities();
         System.out.println(cities);
-*/
     }
 
 }

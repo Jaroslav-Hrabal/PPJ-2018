@@ -6,8 +6,6 @@
         </encoder>
     </appender>
 
-
-
     <logger name="cz.tul" level="DEBUG"/>
 
     <root level="INFO">
@@ -17,7 +15,6 @@
     <springProfile name="debug">
         <root level="DEBUG">
             <appender-ref ref="STDOUT"/>
-
         </root>
     </springProfile>
 
